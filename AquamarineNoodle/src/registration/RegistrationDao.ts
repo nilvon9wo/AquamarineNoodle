@@ -12,7 +12,7 @@ class RegistrationDao implements DaoInterface {
     }
     
     getAll() {
-        console.log('this.registrations', this.registrations);
+        console.log('$$$$ RETURN this.registrations', this.registrations);
         return this.registrations;
     }
     
