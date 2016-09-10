@@ -1,0 +1,1 @@
+tsc --removeComments --module commonjs --target ES5 --outDir build src/app.ts
