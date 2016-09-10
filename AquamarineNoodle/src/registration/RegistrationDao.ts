@@ -1,8 +1,5 @@
 import DaoInterface from '../common/DaoInterface';
-
 import RegistrationInterface from '../registration/RegistrationInterface';
-import RegistrationModel from '../registration/RegistrationModel';
-
 
 class RegistrationDao implements DaoInterface {
     private registrations: Array<RegistrationInterface> = new Array<RegistrationInterface>(); 
