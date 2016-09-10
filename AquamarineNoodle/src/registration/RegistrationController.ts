@@ -13,11 +13,8 @@ class RegistrationController extends ControllerAbstract {
         super(app);
         this.addEndpoints();
 
-        if (daos) {
-            this.registrationDao = daos.registrationDao || new RegistrationDao();
-            this.httpStatusDao = daos.httpStatusDao || new HttpStatusDao();
-        }
-
+        this.registrationDao = daos && daos.registrationDao || new RegistrationDao();
+        this.httpStatusDao = daos && daos.httpStatusDao || new HttpStatusDao();
     }
 
     addEndpoints() {

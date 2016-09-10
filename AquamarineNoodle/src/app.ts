@@ -4,7 +4,7 @@
 // Loosely derived from 
 // http://www.software-architects.com/devblog/2014/06/04/Learn-by-Example-AngularJS-NodeJS-and-Typescript
 
-const port: number = process.env.PORT || 3000;
+const port: number = process.env.PORT || 8080;
 
 const express = require('express');
 const bodyParser = require('body-parser')
