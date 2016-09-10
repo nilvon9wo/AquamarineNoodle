@@ -16,5 +16,9 @@
         "express": "^4.14.0",
         "multer": "^1.2.0",
         "typescript": "^1.8.10"
+    },
+    "scripts": {
+        "start": "node src\/app.ts"
     }
+
 }

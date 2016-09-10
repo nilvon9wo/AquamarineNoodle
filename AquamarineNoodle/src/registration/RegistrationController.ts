@@ -1,7 +1,7 @@
 import ControllerAbstract from '../common/ControllerAbstract';
 
-import RegistrationInterface from '../registration/RegistrationInterface';
-import RegistrationModel from '../registration/RegistrationModel';
+import RegistrationInterface from './RegistrationInterface';
+import RegistrationModel from './RegistrationModel';
 import RegistrationDao from './RegistrationDao';
 import HttpStatusDao from '../httpStatusCodes/HttpStatusDao';
 
@@ -19,7 +19,7 @@ class RegistrationController extends ControllerAbstract {
 
     addEndpoints() {
         this.app.get('/api/registrations', (request: any, response: any) => {
-            return this.registrationDao.getAll();
+            return response.send(this.registrationDao.getAll());
         });
 
         this.app.post('/api/register', (request: any, response: any) => {

@@ -1,1 +1,1 @@
-tsc --removeComments --module commonjs --target ES5 --outDir build src/app.ts
+tsc --rootDir src --module commonjs --noFallthroughCasesInSwitch --noImplicitAny --noImplicitReturns --noImplicitUseStrict --outDir build/src --pretty --removeComments
