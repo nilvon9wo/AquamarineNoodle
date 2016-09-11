@@ -67,8 +67,9 @@ gulp.task('clean build', ['clean', 'build']);
 
 gulp.task('default', ['build']);
 
-// watchify tasks --------------------------------------
+gulp.task('watch', function(){
+    var watchedBrowserify = watchify(makeBrowserFriendly);
+    watchedBrowserify.on('update', bundle);
+    watchedBrowserify.on('log', gulpUtil.log);
+});
 
-var watchedBrowserify = watchify(makeBrowserFriendly);
-watchedBrowserify.on('update', bundle);
-watchedBrowserify.on('log', gulpUtil.log);
