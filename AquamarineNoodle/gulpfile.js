@@ -5,6 +5,7 @@ var UI_DIST = 'dist/ui';
 
 var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
+var del = require('del');
 var gulp = require('gulp');
 var gulpUtil = require('gulp-util');
 var source = require('vinyl-source-stream');
@@ -40,6 +41,10 @@ function bundle() {
 
 // gulp tasks --------------------------------------
 
+gulp.task('clean', function(callback){
+    return del([API_DIST, UI_DIST], callback);
+});
+
 gulp.task('copy-html', function () {
     return gulp.src(uiPaths.pages)
             .pipe(gulp.dest(UI_DIST));
@@ -56,7 +61,11 @@ gulp.task('transpile-api', function () {
             .js.pipe(gulp.dest(API_DIST));
 });
 
-gulp.task('default', ['transpile-api', 'transpile-ui']);
+gulp.task('build', ['transpile-api', 'transpile-ui']);
+
+gulp.task('clean build', ['clean', 'build']);
+
+gulp.task('default', ['build']);
 
 // watchify tasks --------------------------------------
 
