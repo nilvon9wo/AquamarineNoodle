@@ -9,7 +9,7 @@ class RegistrationController extends ControllerAbstract {
     private registrationDao: RegistrationDao;
     private httpStatusDao: HttpStatusDao;
 
-    constructor(app: any, registrationDao?: RegistrationDao, dependencies?: any) {
+    constructor(app: any, dependencies?: any) {
         super(app);
         this.addEndpoints();
 
@@ -27,7 +27,7 @@ class RegistrationController extends ControllerAbstract {
             if (registration.isValid()) {
                 this.registrationDao.add(registration);
                 response.sendStatus(this.httpStatusDao.get('CREATED').code);
-            } else 
+            } else {
                 response.sendStatus(this.httpStatusDao.get('BAD_REQUEST').code);
             }
         });
