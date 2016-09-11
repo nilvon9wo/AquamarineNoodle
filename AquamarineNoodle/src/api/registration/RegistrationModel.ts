@@ -1,6 +1,8 @@
 import ModelInterface from '../common/ModelInterface';
 import RegistrationInterface from './RegistrationInterface';
 
+const MIN_AGE = 18;
+
 class RegistrationModel implements ModelInterface, RegistrationInterface {
     public salutation: string;
     public name: string;
@@ -13,7 +15,11 @@ class RegistrationModel implements ModelInterface, RegistrationInterface {
     }
     
     public isValid() {
-        return this.age >= 18;
+        let isOldEnough = this.age > MIN_AGE;
+        if (!isOldEnough) {
+            console.warn(`UNDER AGE: ${this.name} is only ${this.age}. ${MIN_AGE} is required.`);
+        }
+        return isOldEnough;
     }
 }
 

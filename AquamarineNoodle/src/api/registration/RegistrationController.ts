@@ -3,18 +3,18 @@ import ControllerAbstract from '../common/ControllerAbstract';
 import RegistrationInterface from './RegistrationInterface';
 import RegistrationModel from './RegistrationModel';
 import RegistrationDao from './RegistrationDao';
-import HttpStatusDao from '../httpStatusCodes/HttpStatusDao';
+import HttpStatusDao from '../httpStatus/HttpStatusDao';
 
 class RegistrationController extends ControllerAbstract {
     private registrationDao: RegistrationDao;
     private httpStatusDao: HttpStatusDao;
 
-    constructor(app: any, registrationDao?: RegistrationDao, daos?: any) {
+    constructor(app: any, registrationDao?: RegistrationDao, dependencies?: any) {
         super(app);
         this.addEndpoints();
 
-        this.registrationDao = daos && daos.registrationDao || new RegistrationDao();
-        this.httpStatusDao = daos && daos.httpStatusDao || new HttpStatusDao();
+        this.registrationDao = dependencies && dependencies.registrationDao || new RegistrationDao();
+        this.httpStatusDao = dependencies && dependencies.httpStatusDao || new HttpStatusDao();
     }
 
     addEndpoints() {
@@ -26,9 +26,9 @@ class RegistrationController extends ControllerAbstract {
             var registration = new RegistrationModel(<RegistrationInterface>request.body);
             if (registration.isValid()) {
                 this.registrationDao.add(registration);
-                response.send(this.httpStatusDao.get('CREATED').code);
-            } else {
-                response.send(this.httpStatusDao.get('BAD_REQUEST').code);
+                response.sendStatus(this.httpStatusDao.get('CREATED').code);
+            } else 
+                response.sendStatus(this.httpStatusDao.get('BAD_REQUEST').code);
             }
         });
     }
