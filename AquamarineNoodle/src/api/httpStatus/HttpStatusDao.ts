@@ -10,26 +10,26 @@ class HttpStatusDao implements DaoInterface {
         this.arrayHelper = dependencies && dependencies.arrayHelper || new ArrayHelper();
 
         [
-            new HttpStatusModel({ category: 'Success', label: 'Ok', code: 200 }),
-            new HttpStatusModel({ category: 'Success', label: 'Created', code: 201 }),
-            new HttpStatusModel({ category: 'Client Error', label: 'Bad Request', code: 400 }),
-            new HttpStatusModel({ category: 'Client Error', label: 'Unauthorized', code: 401 })
-        ].forEach(status => this.statuses.push(status))
+            new HttpStatusModel({ category: 'Success', code: 200, label: 'Ok'}),
+            new HttpStatusModel({ category: 'Success', code: 201, label: 'Created' }),
+            new HttpStatusModel({ category: 'Client Error', code: 400, label: 'Bad Request' }),
+            new HttpStatusModel({ category: 'Client Error', code: 401, label: 'Unauthorized' })
+        ].forEach(status => this.statuses.push(status));
     }
 
-    getAll() {
+    public getAll() {
         return this.statuses;
     }
 
-    get(label: string): HttpStatusModel {
+    public get(label: string): HttpStatusModel {
         return this.arrayHelper.arrayQuery({
             array: this.statuses,
+            matchTransform: function (possibleMatch: string) {
+                return possibleMatch.toUpperCase();
+            },
             queryField: 'label',
             targetValue: label.replace('_', ' ').toUpperCase(),
-            throwOnMatchless: true,
-            matchTransform: function (possibleMatch:string){
-                return possibleMatch.toUpperCase();
-            }
+            throwOnMatchless: true
         });
     }
 }

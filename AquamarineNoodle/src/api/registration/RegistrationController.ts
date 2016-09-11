@@ -17,13 +17,13 @@ class RegistrationController extends ControllerAbstract {
         this.httpStatusDao = dependencies && dependencies.httpStatusDao || new HttpStatusDao();
     }
 
-    addEndpoints() {
+    public addEndpoints() {
         this.app.get('/api/registrations', (request: any, response: any) => {
             return response.send(this.registrationDao.getAll());
         });
 
         this.app.post('/api/register', (request: any, response: any) => {
-            var registration = new RegistrationModel(<RegistrationInterface>request.body);
+            const registration = new RegistrationModel(<RegistrationInterface>request.body);
             if (registration.isValid()) {
                 this.registrationDao.add(registration);
                 response.sendStatus(this.httpStatusDao.get('CREATED').code);

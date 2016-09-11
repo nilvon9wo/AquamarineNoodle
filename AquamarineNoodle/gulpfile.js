@@ -6,15 +6,21 @@ var UI_DIST = 'dist/ui';
 var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
 var del = require('del');
+var environments = require('gulp-environments');
 var gulp = require('gulp');
 var gulpUtil = require('gulp-util');
-var nodemon = require('gulp-nodemon')
+var nodemon = require('gulp-nodemon');
 var source = require('vinyl-source-stream');
 var sourceMaps = require('gulp-sourcemaps');
 var typeScript = require('gulp-typescript');
 var typeScriptify = require('tsify');
+var typeScriptLint = require('gulp-tslint');
 var uglify = require('gulp-uglify');
 var watchify = require('watchify');
+
+var development = environments.development;
+var staging = environments.make('staging');
+var production = environments.production;
 
 var uiPaths = {
     pages: [UI_SRC + '/*.html']
@@ -28,7 +34,7 @@ var makeBrowserFriendly = browserify({
     packageCache: {}
 }).plugin(typeScriptify);
 
-function bundle() {
+function createClientUiBundle() {
     return makeBrowserFriendly
             .transform('babelify')
             .bundle()
@@ -42,7 +48,7 @@ function bundle() {
 
 // gulp tasks --------------------------------------
 
-gulp.task('clean', function(callback){
+gulp.task('clean', function (callback) {
     return del([API_DIST, UI_DIST], callback);
 });
 
@@ -51,15 +57,18 @@ gulp.task('copy-html', function () {
             .pipe(gulp.dest(UI_DIST));
 });
 
-gulp.task('start-dev', function(){
+gulp.task('set-dev', development.task);
+
+gulp.task('start-dev-api', ['tslint', 'transpile-api'], function () {
     nodemon({
         script: API_DIST + '/app.js',
         ext: 'css html js json sh ts',
-        env: { 'NODE_ENV' : 'development'}
+        env: {'NODE_ENV': 'development'},
+        tasks: ['tslint', 'transpile-api']
     });
 });
 
-gulp.task('transpile-ui', ['copy-html'], bundle);
+gulp.task('transpile-ui', ['copy-html'], createClientUiBundle);
 
 gulp.task('transpile-api', function () {
     var tsProject = typeScript.createProject('src/api/tsconfig.json');
@@ -70,15 +79,27 @@ gulp.task('transpile-api', function () {
             .js.pipe(gulp.dest(API_DIST));
 });
 
-gulp.task('build', ['transpile-api', 'transpile-ui']);
+gulp.task('tslint', function () {
+    gulp.src('./src/**/*.ts')
+            .pipe(typeScriptLint({
+                configuration: 'tslint.json',
+                formatter: 'verbose'
+            }))
+            .pipe(typeScriptLint.report({
+                emitError: false,
+                summarizeFailureOutput: true
+            }));
+});
 
-gulp.task('clean build', ['clean', 'build']);
+gulp.task('build-all', ['transpile-api', 'transpile-ui']);
+
+gulp.task('clean-build', ['clean', 'build-all']);
 
 gulp.task('default', ['build']);
 
-gulp.task('watch', function(){
+gulp.task('watch', function () {
     var watchedBrowserify = watchify(makeBrowserFriendly);
-    watchedBrowserify.on('update', bundle);
+    watchedBrowserify.on('update', createClientUiBundle);
     watchedBrowserify.on('log', gulpUtil.log);
 });
 

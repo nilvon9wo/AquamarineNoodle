@@ -2,20 +2,20 @@ import DaoInterface from '../common/DaoInterface';
 import RegistrationInterface from '../registration/RegistrationInterface';
 
 class RegistrationDao implements DaoInterface {
-    private registrations: Array<RegistrationInterface> = new Array<RegistrationInterface>(); 
+    private registrations: Array<RegistrationInterface> = new Array<RegistrationInterface>();
 
     constructor() {
         this.registrations.push(
-            { salutation: "Mr.", name: "Tom Tailor", age: 20 },
-            { salutation: "Mr.", name: "Max Muster", age: 19 }
+            { age: 20, name: 'Tom Tailor', salutation: 'Mr.' },
+            { age: 19, name: 'Max Muster', salutation: 'Mr.' }
         );
     }
-    
-    getAll() {
+
+    public getAll() {
         return this.registrations;
     }
-    
-    add(registraction: RegistrationInterface){
+
+    public add(registraction: RegistrationInterface) {
         this.registrations.push(registraction);
     }
 }
