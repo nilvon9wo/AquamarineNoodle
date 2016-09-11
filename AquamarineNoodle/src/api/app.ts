@@ -12,7 +12,8 @@ const bodyParser = require('body-parser')
 import RegistrationController = require('./registration/RegistrationController');
 
 const app = express();
-app.use(bodyParser());
-var registrationController = new RegistrationController.default(app);
-
+new RegistrationController.default(app);
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.listen(port);
+console.info(`Listening to port: ${port}`);
