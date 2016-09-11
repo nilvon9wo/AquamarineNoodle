@@ -10,7 +10,7 @@ class UserModel implements ModelInterface, UserInterface {
     constructor (user: UserInterface) {
         this.username = user.username;
         this.password = user.password;
+        }
     }
-}
 
 export default UserModel;

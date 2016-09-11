@@ -14,10 +14,9 @@ class BasicAuthenticationService {
         this.httpStatusDao = dependencies && dependencies.httpStatusDao || new HttpStatusDao();
         
         app.use((request: any, response: any, next: any) => {
-            var auth = require('basic-auth');
-            const basicUser = auth(request);
+            const user = this.getUser(request);
             
-            if (!basicUser || !basicUser.name || !basicUser.pass || this.isValid(basicUser)) {
+            if (!user || !this.userDao.isValid(user)) {
                 const status = this.httpStatusDao.get('UNAUTHORIZED');
                 response.statusCode = status.code;
                 response.setHeader('WWW-Authentcate', 'Basic realm="Aquamarine-Noodle"');
@@ -28,14 +27,13 @@ class BasicAuthenticationService {
         });
     }
     
-    isValid(basicUser: any){
-        const user = new UserModel(<UserInterface>{
-            username: basicUser.name,
-            password: basicUser.password
+    getUser(request:any){
+        var auth = require('basic-auth');
+        const user = new auth(request);
+        return user && user.name && user.pass && new UserModel(<UserInterface>{
+            username: user.name,
+            password: user.pass
         });
-        
-        const result = this.userDao.isValid(user);
-        return result;
     }
 }
 

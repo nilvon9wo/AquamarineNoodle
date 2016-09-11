@@ -38,8 +38,7 @@ class UserDao implements DaoInterface {
             throwOnMatchless: false,
         });
         
-        const result = possibleUser.password === matchingUser.password;
-        return result;
+        return matchingUser && matchingUser.password === possibleUser.password;
     }
 }
 
