@@ -54,7 +54,7 @@ gulp.task('transpile-ui', ['copy-html'], bundle);
 
 gulp.task('transpile-api', function () {
     var tsProject = typeScript.createProject('src/api/tsconfig.json');
-    
+
     return tsProject
             .src()
             .pipe(typeScript(tsProject))

@@ -4,16 +4,17 @@
 // Loosely derived from 
 // http://www.software-architects.com/devblog/2014/06/04/Learn-by-Example-AngularJS-NodeJS-and-Typescript
 
-const port: number = process.env.PORT || 3000;
-
 const express = require('express');
-const bodyParser = require('body-parser')
-
-import RegistrationController = require('./registration/RegistrationController');
-
 const app = express();
-new RegistrationController.default(app);
+const port: number = process.env.PORT || 3000;
+    
+const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
 app.listen(port);
+
+import RegistrationController = require('./registration/RegistrationController');
+const registrationController = new RegistrationController.default(app);
+
 console.info(`Listening to port: ${port}`);
