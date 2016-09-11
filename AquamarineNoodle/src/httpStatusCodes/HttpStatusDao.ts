@@ -18,7 +18,6 @@ class HttpStatusDao implements DaoInterface {
     }
 
     get(label: string): HttpStatusModel {
-        console.log('$$$ label', label);
         const query = label.replace('_', ' ').toUpperCase();
 
         const BreakException = {};
@@ -26,11 +25,7 @@ class HttpStatusDao implements DaoInterface {
         
         try {
             this.statuses.forEach(status => {
-                console.log('$$$ status', status);
-                console.log('$$$ query', query);
-
                 if (status.label.toUpperCase() === query) {
-                    console.log('status ===', status);
                     result = status;
                     throw BreakException
                 }
@@ -43,7 +38,6 @@ class HttpStatusDao implements DaoInterface {
             return result
         }
 
-        console.error('throw', label);
         throw new Error('Invalid label: ' + label);
     }
 }

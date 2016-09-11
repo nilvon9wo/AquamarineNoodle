@@ -1,1 +1,1 @@
-node build/src/app
+node dist/app

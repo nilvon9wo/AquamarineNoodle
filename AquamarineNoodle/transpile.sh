@@ -1,1 +1,0 @@
-tsc --rootDir src --module commonjs --noFallthroughCasesInSwitch --noImplicitAny --noImplicitReturns --noImplicitUseStrict --outDir build/src --pretty --removeComments

@@ -1,24 +1,41 @@
 {
-    "name": "AquamarineNoodle",
-    "version": "1.0.0",
-    "keywords": [
-        "util",
-        "functional",
-        "server",
-        "client",
-        "browser"
-    ],
-    "author": "Brian Kessler",
-    "contributors": [],
-    "dependencies": {
-        "body-parser": "^1.15.2",
-        "cookie-parser": "^1.4.3",
-        "express": "^4.14.0",
-        "multer": "^1.2.0",
-        "typescript": "^1.8.10"
-    },
-    "scripts": {
-        "start": "node src\/app.ts"
-    }
-
+  "name": "aquamarine-noodle",
+  "version": "1.0.0",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "Brian Kessler",
+  "contributors": [],
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "gulp-cli": "^1.2.2",
+    "gulp-tslint": "^4.1.2",
+    "multer": "^1.2.0",
+    "tslint": "^3.15.1",
+    "typescript": "^1.8.10"
+  },
+  "scripts": {
+    "start": "node src/app.ts"
+  },
+  "description": "A project to explore and showcase the latest EcmaScript related technologies.",
+  "main": "Gruntfile.js",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^2.13.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nilvon9wo/AquamarineNoodle.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nilvon9wo/AquamarineNoodle/issues"
+  },
+  "homepage": "https://github.com/nilvon9wo/AquamarineNoodle#readme"
 }
