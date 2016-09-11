@@ -8,6 +8,7 @@ var buffer = require('vinyl-buffer');
 var del = require('del');
 var gulp = require('gulp');
 var gulpUtil = require('gulp-util');
+var nodemon = require('gulp-nodemon')
 var source = require('vinyl-source-stream');
 var sourceMaps = require('gulp-sourcemaps');
 var typeScript = require('gulp-typescript');
@@ -48,6 +49,14 @@ gulp.task('clean', function(callback){
 gulp.task('copy-html', function () {
     return gulp.src(uiPaths.pages)
             .pipe(gulp.dest(UI_DIST));
+});
+
+gulp.task('start-dev', function(){
+    nodemon({
+        script: API_DIST + '/app.js',
+        ext: 'css html js json sh ts',
+        env: { 'NODE_ENV' : 'development'}
+    });
 });
 
 gulp.task('transpile-ui', ['copy-html'], bundle);
