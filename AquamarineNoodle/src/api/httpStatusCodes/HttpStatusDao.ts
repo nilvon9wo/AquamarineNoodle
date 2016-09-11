@@ -10,6 +10,7 @@ class HttpStatusDao implements DaoInterface {
             new HttpStatusModel({ category: 'Success', label: 'Ok', code: 200 }),
             new HttpStatusModel({ category: 'Success', label: 'Created', code: 201 }),
             new HttpStatusModel({ category: 'Client Error', label: 'Bad Request', code: 400 })
+            new HttpStatusModel({ category: 'Client Error', label: 'Unauthorized', code: 401 })
         );
     }
 
