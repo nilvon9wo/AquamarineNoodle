@@ -5,6 +5,7 @@ var UI_DIST = 'dist/ui';
 
 var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
+var bunyan = require('bunyan');
 var del = require('del');
 var environments = require('gulp-environments');
 var gulp = require('gulp');
@@ -46,6 +47,26 @@ function createClientUiBundle() {
             .pipe(gulp.dest(UI_DIST));
 }
 
+function transpileApi() {
+    var tsProject = typeScript.createProject('src/api/tsconfig.json');
+    return tsProject
+            .src()
+            .pipe(typeScript(tsProject))
+            .js.pipe(gulp.dest(API_DIST));
+}
+
+function tslint() {
+    gulp.src('./src/**/*.ts')
+            .pipe(typeScriptLint({
+                configuration: 'tslint.json',
+                formatter: 'verbose'
+            }))
+            .pipe(typeScriptLint.report({
+                emitError: false,
+                summarizeFailureOutput: true
+            }));
+}
+
 // gulp tasks --------------------------------------
 
 gulp.task('clean', function (callback) {
@@ -60,36 +81,37 @@ gulp.task('copy-html', function () {
 gulp.task('set-dev', development.task);
 
 gulp.task('start-dev-api', ['tslint', 'transpile-api'], function () {
+    var spawn = require('child_process').spawn;
     nodemon({
-        script: API_DIST + '/app.js',
-        ext: 'css html js json sh ts',
         env: {'NODE_ENV': 'development'},
-        tasks: ['tslint', 'transpile-api']
-    });
+        ext: 'css html js json sh ts',
+        legacyWatch: true,
+        readable: true,
+        script: API_DIST + '/app.js',
+        stdout: true
+    })
+            .on('restart', function () {
+                gulpUtil.log('---------- Restarted! ----------', gulpUtil.colors.magenta('123'));
+                tslint();
+            })
+            .on('readable', function () {
+                bunyan && bunyan.kill();
+                bunyan = spawn('./node_modules/bunyan/bin/bunyan', [
+                    '--output', 'short',
+                    '--color'
+                ]);
+                bunyan.stdout.pipe(process.stdout);
+                bunyan.stderr.pipe(process.stderr);
+                this.stdout.pipe(bunyan.stdin);
+                this.stderr.pipe(bunyan.stdin);
+            });
 });
 
 gulp.task('transpile-ui', ['copy-html'], createClientUiBundle);
 
-gulp.task('transpile-api', function () {
-    var tsProject = typeScript.createProject('src/api/tsconfig.json');
+gulp.task('transpile-api', transpileApi);
 
-    return tsProject
-            .src()
-            .pipe(typeScript(tsProject))
-            .js.pipe(gulp.dest(API_DIST));
-});
-
-gulp.task('tslint', function () {
-    gulp.src('./src/**/*.ts')
-            .pipe(typeScriptLint({
-                configuration: 'tslint.json',
-                formatter: 'verbose'
-            }))
-            .pipe(typeScriptLint.report({
-                emitError: false,
-                summarizeFailureOutput: true
-            }));
-});
+gulp.task('tslint', tslint);
 
 gulp.task('build-all', ['transpile-api', 'transpile-ui']);
 
@@ -102,4 +124,3 @@ gulp.task('watch', function () {
     watchedBrowserify.on('update', createClientUiBundle);
     watchedBrowserify.on('log', gulpUtil.log);
 });
-

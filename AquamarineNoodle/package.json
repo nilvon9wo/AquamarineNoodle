@@ -26,6 +26,8 @@
   "devDependencies": {
     "babelify": "^7.3.0",
     "browserify": "^13.1.0",
+    "bunyan": "^1.8.1",
+    "child_process": "^1.0.2",
     "del": "^2.2.2",
     "grunt": "^1.0.1",
     "grunt-contrib-jshint": "^1.0.0",
