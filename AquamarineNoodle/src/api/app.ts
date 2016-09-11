@@ -1,5 +1,5 @@
-/// <reference path='../declarations/node/node.d.ts' />
-/// <reference path='../declarations/express/express.d.ts' />
+/// <reference path='../../declarations/node/node.d.ts' />
+/// <reference path='../../declarations/express/express.d.ts' />
  
 // Loosely derived from 
 // http://www.software-architects.com/devblog/2014/06/04/Learn-by-Example-AngularJS-NodeJS-and-Typescript

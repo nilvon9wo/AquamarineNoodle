@@ -26,8 +26,11 @@
   "description": "A project to explore and showcase the latest EcmaScript related technologies.",
   "main": "Gruntfile.js",
   "devDependencies": {
+    "browserify": "^13.1.0",
     "gulp": "^3.9.1",
-    "gulp-typescript": "^2.13.6"
+    "gulp-typescript": "^2.13.6",
+    "tsify": "^1.0.6",
+    "vinyl-source-stream": "^1.1.0"
   },
   "repository": {
     "type": "git",
