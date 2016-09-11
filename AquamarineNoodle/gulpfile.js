@@ -91,19 +91,8 @@ gulp.task('start-dev-api', ['tslint', 'transpile-api'], function () {
         stdout: true
     })
             .on('restart', function () {
-                gulpUtil.log('---------- Restarted! ----------', gulpUtil.colors.magenta('123'));
+                gulpUtil.log('---------- Restarted! ----------');
                 tslint();
-            })
-            .on('readable', function () {
-                bunyan && bunyan.kill();
-                bunyan = spawn('./node_modules/bunyan/bin/bunyan', [
-                    '--output', 'short',
-                    '--color'
-                ]);
-                bunyan.stdout.pipe(process.stdout);
-                bunyan.stderr.pipe(process.stderr);
-                this.stdout.pipe(bunyan.stdin);
-                this.stderr.pipe(bunyan.stdin);
             });
 });
 
@@ -119,7 +108,7 @@ gulp.task('clean-build', ['clean', 'build-all']);
 
 gulp.task('default', ['build']);
 
-gulp.task('watch', function () {
+gulp.task('watch-ui', function () {
     var watchedBrowserify = watchify(makeBrowserFriendly);
     watchedBrowserify.on('update', createClientUiBundle);
     watchedBrowserify.on('log', gulpUtil.log);

@@ -1,3 +1,2 @@
 #!/bin/bash
-gulp transpile-api
-export $(cat .env | xargs) && node dist/api/app
+export $(cat .env | xargs) && gulp start-dev-api
