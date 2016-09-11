@@ -11,6 +11,7 @@
   "author": "Brian Kessler",
   "contributors": [],
   "dependencies": {
+    "basic-auth": "^1.0.4",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
@@ -18,7 +19,7 @@
     "multer": "^1.2.0"
   },
   "scripts": {
-    "start": "node dist\/api\/app.js"
+    "start": "node dist/api/app.js"
   },
   "description": "A project to explore and showcase the latest EcmaScript related technologies.",
   "main": "Gruntfile.js",
