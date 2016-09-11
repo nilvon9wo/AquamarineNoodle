@@ -1,5 +1,5 @@
 {
-  "name": "aquamarine-noodle",
+  "name": "aquamarine-noodle-server",
   "version": "1.0.0",
   "keywords": [
     "util",
@@ -15,7 +15,6 @@
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
-    "gulp-cli": "^1.2.2",
     "multer": "^1.2.0"
   },
   "scripts": {
@@ -33,6 +32,7 @@
     "grunt-contrib-jshint": "^1.0.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
+    "gulp-cli": "^1.2.2",
     "gulp-environments": "^0.1.1",
     "gulp-file-cache": "0.0.1",
     "gulp-nodemon": "^2.1.0",

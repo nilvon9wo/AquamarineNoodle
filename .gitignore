@@ -4,3 +4,13 @@
 /AquamarineNoodle/.env
 /AquamarineNoodle/npm-debug.log
 /AquamarineNoodle/.gulp-cache
+/aquamarine-noodle-server/node_modules/
+/aquamarine-noodle-server/nbproject/private/
+/aquamarine-noodle-client/nbproject/private/
+/aquamarine-noodle-client/node_modules/
+/aquamarine-noodle-client/nbproject/
+/aquamarine-noodle-server/.env
+/aquamarine-noodle-server/.gulp-cache
+/aquamarine-noodle-server/dist/
+/aquamarine-noodle-server/nbproject/
+/aquamarine-noodle-client/app/bower_components/
