@@ -23,8 +23,6 @@ class RegistrationController extends ControllerAbstract {
         });
 
         this.app.post('/api/register', (request: any, response: any) => {
-            console.log('$$$$ request',  request);
-            console.log('$$$$ request.body',  request.body);
             var registration = new RegistrationModel(<RegistrationInterface>request.body);
             if (registration.isValid()) {
                 this.registrationDao.add(registration);
