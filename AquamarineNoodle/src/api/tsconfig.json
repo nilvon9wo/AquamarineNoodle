@@ -7,7 +7,7 @@
         "noImplicitUseStrict": true,
         "removeComments": true,
         "sourceMap": false,
-        "target": "es5"
+        "target": "es2015"
     },
     "exclude": [
         "dist",
