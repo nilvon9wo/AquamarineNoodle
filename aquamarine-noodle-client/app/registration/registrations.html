@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="registration.css" />
+
+<h1>Registration Sample</h1>
+<button type="button" class="btn btn-primary" ng-click="refresh()">Refresh</button>
+
+<table class="table registration-table">
+    <thead>
+        <tr>
+            <th>Salutation</th>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="registration in registrations">
+            <td>{{registration.salutation}}</td>
+            <td>{{registration.name}}</td>
+            <td>{{registration.age}}</td>
+        </tr>
+    </tbody>
+</table> 
+
+<p>Do you want to <a href="#register">register</a>?</p>
