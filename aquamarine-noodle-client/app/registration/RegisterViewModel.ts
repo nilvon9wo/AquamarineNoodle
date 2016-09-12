@@ -2,32 +2,21 @@
 
 import DefaultLogger from '../logger/DefaultLogger';
 import LoggerInterface from '../logger/LoggerInterface';
-import RegistrationInterface from './RegistrationInterface';
-import RegistrationViewInterface from './RegistrationViewInterface';
+import RegisterViewInterface from './RegisterViewInterface';
 import ViewInterface from '../common/ViewInterface';
 
-class RegistrationViewModel implements ViewInterface {
-    private scope: RegistrationViewInterface;
+class RegisterViewModel implements ViewInterface {
+    private scope: RegisterViewInterface;
     private http: ng.IHttpService;
     private logger: DefaultLogger;
 
-    constructor($scope: RegistrationViewInterface, $http: ng.IHttpService, private $logger: LoggerInterface) {
+    constructor($scope: RegisterViewInterface, $http: ng.IHttpService, private $logger: LoggerInterface) {
         this.scope = $scope;
         this.http = $http;
         this.logger = $logger;
 
-        $scope.registrations = new Array<RegistrationInterface>();
-        $scope.refresh = this.refresh;
         $scope.save = this.save;
     }
-
-    public refresh() {
-        this.logger.log('Requesting...');
-        this.http.get<Array<RegistrationInterface>>('/api/registrations')
-            .success(registrations => {
-                this.scope.registrations.forEach(registration => registrations.push(registration));
-            });
-    };
 
     public save() {
         this.http.post('/api/register', {
@@ -46,5 +35,5 @@ class RegistrationViewModel implements ViewInterface {
     }
 }
 
-export default RegistrationViewModel
+export default RegisterViewModel
 
