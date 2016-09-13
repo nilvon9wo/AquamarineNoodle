@@ -1,8 +1,8 @@
 /.env
 /.gulp-cache
+/client/
 /es5/
 /nbproject/
 /node_modules/
 /npm-debug.log
-/webapp/
 /.gulp-cache

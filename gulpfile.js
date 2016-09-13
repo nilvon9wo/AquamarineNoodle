@@ -1,6 +1,6 @@
 var SRC = 'src';
 var ES5 = 'es5';
-var WEB_APP = 'webapp';
+var CLIENT = 'client';
 
 var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
@@ -45,7 +45,7 @@ function createClientUiBundle() {
             .pipe(sourceMaps.init({loadMaps: true}))
             .pipe(uglify())
             .pipe(sourceMaps.write('./'))
-            .pipe(gulp.dest(WEB_APP));
+            .pipe(gulp.dest(CLIENT));
 }
 
 function transpile() {
@@ -71,12 +71,12 @@ function tslint() {
 // gulp tasks --------------------------------------
 
 gulp.task('clean', function (callback) {
-    return del([ES5, WEB_APP], callback);
+    return del([ES5, CLIENT], callback);
 });
 
 gulp.task('copy-html', function () {
     return gulp.src(uiPaths.pages)
-            .pipe(gulp.dest(WEB_APP)); 
+            .pipe(gulp.dest(CLIENT)); 
 });
 
 gulp.task('set-dev', development.task);
