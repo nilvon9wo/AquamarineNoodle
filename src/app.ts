@@ -18,8 +18,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static('../Client'));
 
-const authenticationEnabled = process.env.AUTHENTICATION_ENABLED && process.env.AUTHENTICATION_ENABLED !== 'false';
-if (authenticationEnabled) {
+const authenticationDisabled = process.env.AUTHENTICATION_DISABLED && process.env.AUTHENTICATION_DISABLED !== 'false';
+if (!authenticationDisabled) {
     new BasicAuthenticationService.default(app);
 }
 

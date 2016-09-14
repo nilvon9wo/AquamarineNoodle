@@ -6,3 +6,5 @@
 /node_modules/
 /npm-debug.log
 /.gulp-cache
+/temp/
+/HTML5Application-temp/temp/nbproject/private/
