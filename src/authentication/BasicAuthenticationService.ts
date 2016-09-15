@@ -9,7 +9,7 @@ class BasicAuthenticationService {
     private userDao: UserDao;
     private httpStatusDao: HttpStatusDao;
 
-    constructor(app: Express.Application, dependencies?: any) {
+    constructor(app: any, dependencies?: any) {
         this.userDao = dependencies && dependencies.registrationDao || new UserDao();
         this.httpStatusDao = dependencies && dependencies.httpStatusDao || new HttpStatusDao();
 
