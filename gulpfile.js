@@ -147,7 +147,7 @@ gulp.task('transcribe-ui-js', function () {
 gulp.task('set-dev', development.task);
 
 gulp.task('start-dev-api', function () {
-    runSeq('tslint', 'transpile', function () {
+    runSeq('tslint', 'build', function () {
         require('child_process').spawn;
         nodemon({
             env: {'NODE_ENV': 'development'},
