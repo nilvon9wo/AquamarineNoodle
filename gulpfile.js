@@ -38,7 +38,18 @@ var development = environments.development;
 var staging = environments.make('staging');
 var production = environments.production;
 
+function build (callback) {
+    console.log('Building...');
+    return runSeq(
+            'clean-fast',
+            ['transpile', 'transcribe-html', 'concat-css'],
+            'transcribe-ui-js',
+            callback
+            );
+}
+
 function transpile() {
+    console.log('Transpiling...');
     var tsProject = typeScript.createProject('src/tsconfig.json');
     return tsProject
             .src()
@@ -47,7 +58,8 @@ function transpile() {
 }
 
 function tslint() {
-    gulp.src('./src/**/*.ts')
+    console.log('Linting...');
+    return gulp.src('./src/**/*.ts')
             .pipe(typeScriptLint({
                 configuration: 'tslint.json',
                 formatter: 'verbose'
@@ -87,14 +99,7 @@ gulp.task('clean-ui-fast', function (callback) {
 
 gulp.task('default', ['build']);
 
-gulp.task('build', function (callback) {
-    runSeq(
-            'clean-fast',
-            ['transpile', 'transcribe-html', 'concat-css'],
-            'transcribe-ui-js',
-            callback
-            );
-});
+gulp.task('build', build);
 
 gulp.task('build-api', ['transpile']);
 
@@ -155,6 +160,7 @@ gulp.task('start-dev-api', function () {
                 .on('restart', function () {
                     gulpUtil.log('---------- Restarted! ----------');
                     tslint();
+                    build();
                 });
     });
 });
