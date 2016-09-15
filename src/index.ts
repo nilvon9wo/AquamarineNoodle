@@ -4,22 +4,22 @@
 'use strict';
 
 import DefaultLogger from './logger/DefaultLogger';
-import RegistrationsViewModel from './registration/RegistrationsViewModel';
-import RegisterViewModel from './registration/RegisterViewModel';
+import RegistrationsUIController from './registration/RegistrationsUIController';
+import RegisterUIController from './registration/RegisterUIController';
 
 // Declare app level module which depends on views, and components
 angular.module('RegistrationApp', ['ngRoute'])
     .factory('$logger', () => new DefaultLogger())
-    .controller('RegistrationController', RegistrationsViewModel)
-    .controller('RegisterController', RegisterViewModel)
+    .controller('RegistrationUIController', RegistrationsUIController)
+    .controller('RegisterUIController', RegisterUIController)
     .config(($routeProvider: ng.route.IRouteProvider) => {
         $routeProvider
             .when('/', {
-                controller: 'RegistrationController',
+                controller: 'RegistrationUIController',
                 templateUrl: './registration/registrations.html'
             })
             .when('/register', {
-                controller: 'RegisterController',
+                controller: 'RegisterUIController',
                 templateUrl: './registration/register.html'
             });
     });

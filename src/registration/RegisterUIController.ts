@@ -1,12 +1,12 @@
 /// <reference path='../../declarations/angularjs/angular.d.ts' />
 
 import LoggerInterface from '../logger/LoggerInterface';
-import RegisterViewInterface from './RegisterViewInterface';
-import ViewInterface from '../common/ViewInterface';
+import RegisterUIControllerInterface from './RegisterUIControllerInterface';
+import UIControllerInterface from '../common/UIControllerInterface';
 
-class RegisterViewModel implements ViewInterface {
+class RegisterUIController implements UIControllerInterface {
 
-    constructor($scope: RegisterViewInterface, $http: ng.IHttpService, private $logger: LoggerInterface) {
+    constructor($scope: RegisterUIControllerInterface, $http: ng.IHttpService, private $logger: LoggerInterface) {
         $scope.save = function() {
             $logger.log('Saving...');
             $http.post('/api/register', {
@@ -28,4 +28,4 @@ class RegisterViewModel implements ViewInterface {
     }
 }
 
-export default RegisterViewModel;
+export default RegisterUIController;

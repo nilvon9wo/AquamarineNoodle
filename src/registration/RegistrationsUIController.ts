@@ -2,14 +2,13 @@
 
 import LoggerInterface from '../logger/LoggerInterface';
 import RegistrationInterface from './RegistrationInterface';
-import RegistrationViewInterface from './RegistrationsViewInterface';
-import ViewInterface from '../common/ViewInterface';
+import RegistrationsUIControllerInterface from './RegistrationsUIControllerInterface';
+import UIControllerInterface from '../common/UIControllerInterface';
 
-class RegistrationsViewModel implements ViewInterface {
-    constructor($scope: RegistrationViewInterface, $http: ng.IHttpService, private $logger: LoggerInterface) {
+class RegistrationsUIController implements UIControllerInterface {
+    constructor($scope: RegistrationsUIControllerInterface, $http: ng.IHttpService, private $logger: LoggerInterface) {
         $scope.registrations = new Array<RegistrationInterface>();
         $scope.refresh = function() {
-            console.log('refresh this.logger', $logger);
             $logger.log('Requesting...');
             $http.get<Array<RegistrationInterface>>('/api/registrations')
                 .success(registrations => {
@@ -19,4 +18,4 @@ class RegistrationsViewModel implements ViewInterface {
     }
 }
 
-export default RegistrationsViewModel;
+export default RegistrationsUIController;

@@ -5,16 +5,14 @@ var CLIENT = 'client';
 var UI_SCRIPTS = [
     'common/ModelInterface',
     'common/UIControllerInterface',
-    'common/UIControllerAbstract',
-    'common/ViewInterface',
     'logger/DefaultLogger',
     'logger/LoggerInterface',
-    'registration/RegisterViewInterface',
-    'registration/RegisterViewModel',
+    'registration/RegisterUIController',
+    'registration/RegisterUIControllerInterface',
     'registration/RegistrationInterface',
     'registration/RegistrationModel',
-    'registration/RegistrationsViewInterface',
-    'registration/RegistrationsViewModel',
+    'registration/RegistrationsUIController',
+    'registration/RegistrationsUIControllerInterface',
     'index'
 ];
 
