@@ -16,7 +16,7 @@ const port: number = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(express.static('../Client'));
+app.use(express.static(__dirname + '/../client'));
 
 const authenticationDisabled = process.env.AUTHENTICATION_DISABLED && process.env.AUTHENTICATION_DISABLED !== 'false';
 if (!authenticationDisabled) {
