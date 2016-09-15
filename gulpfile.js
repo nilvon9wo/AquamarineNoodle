@@ -4,6 +4,8 @@ var CLIENT = 'client';
 
 var UI_SCRIPTS = [
     'common/ModelInterface',
+    'common/UIControllerInterface',
+    'common/UIControllerAbstract',
     'common/ViewInterface',
     'logger/DefaultLogger',
     'logger/LoggerInterface',

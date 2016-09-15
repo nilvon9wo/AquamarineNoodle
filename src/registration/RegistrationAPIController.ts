@@ -1,11 +1,11 @@
-import ControllerAbstract from '../common/ControllerAbstract';
+import APIControllerAbstract from '../common/APIControllerAbstract';
 
 import RegistrationInterface from './RegistrationInterface';
 import RegistrationModel from './RegistrationModel';
 import RegistrationDao from './RegistrationDao';
 import HttpStatusDao from '../httpStatus/HttpStatusDao';
 
-class RegistrationController extends ControllerAbstract {
+class RegistrationAPIController extends APIControllerAbstract {
     private registrationDao: RegistrationDao;
     private httpStatusDao: HttpStatusDao;
 
@@ -34,4 +34,4 @@ class RegistrationController extends ControllerAbstract {
     }
 }
 
-export default RegistrationController;
+export default RegistrationAPIController;

@@ -5,7 +5,7 @@
 // http://www.software-architects.com/devblog/2014/06/04/Learn-by-Example-AngularJS-NodeJS-and-Typescript    
 
 import BasicAuthenticationService = require('./authentication/BasicAuthenticationService');
-import RegistrationController = require('./registration/RegistrationController');
+import RegistrationAPIController = require('./registration/RegistrationAPIController');
 
 require ('envs');
 
@@ -24,6 +24,6 @@ if (!authenticationDisabled) {
 }
 
 app.listen(port);
-new RegistrationController.default(app);
+new RegistrationAPIController.default(app);
 
 console.info(`Listening to port: ${port}`);
