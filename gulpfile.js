@@ -5,6 +5,8 @@ var CLIENT = 'client';
 var UI_SCRIPTS = [
     'common/ModelInterface',
     'common/ViewInterface',
+    'logger/DefaultLogger',
+    'logger/LoggerInterface',
     'registration/RegisterViewInterface',
     'registration/RegisterViewModel',
     'registration/RegistrationInterface',
@@ -87,6 +89,7 @@ gulp.task('default', ['build']);
 
 gulp.task('build', function (callback) {
     runSeq(
+            'clean-fast',
             ['transpile', 'transcribe-html', 'concat-css'],
             'transcribe-ui-js',
             callback
@@ -124,12 +127,12 @@ gulp.task('transcribe-ui-js', function () {
         cache: {},
         packageCache: {}
     })
-            .transform('babelify')
+            //.transform('babelify')
             .bundle()
             .pipe(source('index.js'))
             .pipe(buffer())
             .pipe(sourceMaps.init({loadMaps: true}))
-            .pipe(uglify())
+            //.pipe(uglify())
             .pipe(sourceMaps.write('./'))
             .pipe(gulp.dest(CLIENT));
 });

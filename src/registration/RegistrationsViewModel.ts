@@ -1,6 +1,5 @@
 /// <reference path='../../declarations/angularjs/angular.d.ts' />
 
-import DefaultLogger from '../logger/DefaultLogger';
 import LoggerInterface from '../logger/LoggerInterface';
 import RegistrationInterface from './RegistrationInterface';
 import RegistrationViewInterface from './RegistrationsViewInterface';
@@ -9,7 +8,7 @@ import ViewInterface from '../common/ViewInterface';
 class RegistrationsViewModel implements ViewInterface {
     private scope: RegistrationViewInterface;
     private http: ng.IHttpService;
-    private logger: DefaultLogger;
+    private logger: LoggerInterface;
 
     constructor($scope: RegistrationViewInterface, $http: ng.IHttpService, private $logger: LoggerInterface) {
         this.scope = $scope;
