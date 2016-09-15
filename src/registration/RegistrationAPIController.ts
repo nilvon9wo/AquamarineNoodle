@@ -1,3 +1,5 @@
+/// <reference path='../../declarations/express/express.d.ts' />
+
 import APIControllerAbstract from '../common/APIControllerAbstract';
 
 import RegistrationInterface from './RegistrationInterface';
@@ -9,7 +11,7 @@ class RegistrationAPIController extends APIControllerAbstract {
     private registrationDao: RegistrationDao;
     private httpStatusDao: HttpStatusDao;
 
-    constructor(app: any, dependencies?: any) {
+    constructor(app: Express.Application, dependencies?: any) {
         super(app);
         this.addEndpoints();
 

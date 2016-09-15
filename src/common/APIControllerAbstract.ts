@@ -1,11 +1,11 @@
 import APIControllerInterface from './APIControllerInterface';
 
 abstract class APIControllerAbstract implements APIControllerInterface {
-    constructor(public app: any) {
+    constructor(public app: Express.Application) {
         this.addEndpoints(app);
     }
 
-    protected abstract addEndpoints(app: any): void;
+    protected abstract addEndpoints(app: Express.Application): void;
 }
 
 export default APIControllerAbstract;
