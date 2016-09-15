@@ -38,7 +38,7 @@ var development = environments.development;
 var staging = environments.make('staging');
 var production = environments.production;
 
-function build (callback) {
+function build(callback) {
     console.log('Building...');
     return runSeq(
             'clean-fast',
@@ -160,7 +160,6 @@ gulp.task('start-dev-api', function () {
                 .on('restart', function () {
                     gulpUtil.log('---------- Restarted! ----------');
                     tslint();
-                    build();
                 });
     });
 });
