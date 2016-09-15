@@ -5,8 +5,6 @@ class EnvironmentHelper {
         this.env = env;
     }
 
-
-
     public evalBoolean(name: string, fallback: boolean) {
         return this.env[name] && this.env[name] !== 'false' || fallback;
     }
