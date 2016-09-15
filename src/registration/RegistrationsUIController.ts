@@ -8,13 +8,16 @@ import UIControllerInterface from '../common/UIControllerInterface';
 class RegistrationsUIController implements UIControllerInterface {
     constructor($scope: RegistrationsUIControllerInterface, $http: ng.IHttpService, private $logger: LoggerInterface) {
         $scope.registrations = new Array<RegistrationInterface>();
-        $scope.refresh = function() {
+        this.getRegistrations($scope, $http);
+        $scope.refresh = () => {
             $logger.log('Requesting...');
-            $http.get<Array<RegistrationInterface>>('/api/registrations')
-                .success(registrations => {
-                    $scope.registrations.forEach(registration => registrations.push(registration));
-                });
+            this.getRegistrations($scope, $http);
         };
+    }
+
+    private getRegistrations($scope: RegistrationsUIControllerInterface, $http: ng.IHttpService) {
+            $http.get<Array<RegistrationInterface>>('/api/registrations')
+                .success(registrations => registrations.forEach(registration => $scope.registrations.push(registration)));
     }
 }
 
