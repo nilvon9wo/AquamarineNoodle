@@ -1,6 +1,6 @@
 var SRC = 'src';
 var ES5 = 'es5';
-var CLIENT = 'client';
+var CLIENT = process.env.CLIENT_DIRECTORY || __dirname + '/client';
 
 var UI_SCRIPTS = [
     'common/ModelInterface',
